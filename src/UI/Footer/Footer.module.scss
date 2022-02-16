@@ -1,0 +1,15 @@
+@import "../../styles/variables.scss";
+
+.footer {
+  background-color: $primary-color;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.footnote {
+  margin: 0;
+  color: $color-white;
+  font-size: 12px;
+}

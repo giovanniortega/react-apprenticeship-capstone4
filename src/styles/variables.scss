@@ -1,0 +1,11 @@
+$primary-color: #2b4660;
+$secondary-color: orange;
+$color-white: #ffffff;
+$color-black: #000000;
+$color-black-50: rgba($color-black, 0.5);
+$text-color: #5e5e5e;
+$color-primary-50: rgba($primary-color, 0.5);
+
+.transition {
+  transition: all 150ms ease-in-out;
+}

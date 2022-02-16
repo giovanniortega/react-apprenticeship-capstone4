@@ -1,0 +1,106 @@
+@import "../../styles/variables.scss";
+
+.header {
+  background-color: $primary-color;
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
+}
+
+.logo {
+  font-size: 40px;
+  margin: 0;
+  a {
+    color: $color-white;
+    text-decoration: none;
+  }
+  span {
+    color: $secondary-color;
+  }
+}
+
+.utilities-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-flow: row wrap;
+  li {
+    padding: 0 5px;
+    line-height: 22px;
+    a,
+    button {
+      color: $color-white;
+      line-height: 16px;
+      display: inline-block;
+      transform: translateY(4px);
+      font-size: 22px;
+    }
+  }
+}
+
+.search-mob-cta {
+  button {
+    background-color: transparent;
+    border-radius: 0;
+    margin: 0;
+    padding: 0;
+    color: $color-white;
+    border: none;
+    line-height: 16px;
+    display: inline-block;
+    transform: translateY(2px);
+  }
+}
+
+.header-right {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+.search-component {
+  position: absolute;
+  width: 100%;
+  display: block;
+  padding: 0 10px;
+  top: 100%;
+  left: 0;
+  background-color: $primary-color;
+  overflow: hidden;
+  height: 0;
+  @extend .transition;
+  &.active {
+    height: 38px;
+  }
+}
+
+@media (min-width: 960px) {
+  .search-component {
+    height: auto;
+    position: relative;
+    top: auto;
+    left: auto;
+    width: auto;
+  }
+
+  .search-mob-cta {
+    display: none;
+  }
+
+  .utilities-menu {
+    li {
+      a,
+      button {
+        transform: translateY(2px);
+      }
+    }
+  }
+}
