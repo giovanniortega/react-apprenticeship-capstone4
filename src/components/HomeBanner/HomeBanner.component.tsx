@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import useHttp from "../../utils/hooks/useHttp";
 import { HomeBannerType } from "../../types/types";
@@ -41,7 +42,9 @@ const HomeBanner = () => {
                   <p className={classes["caption-description"]}>
                     {item.data.description[0].text}
                   </p>
-                  <a className={classes["caption-cta"]}>Check this deal</a>
+                  <Link to="/" className={classes["caption-cta"]}>
+                    Check this deal
+                  </Link>
                 </div>
               </div>
             </section>
