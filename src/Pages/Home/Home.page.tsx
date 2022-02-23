@@ -1,5 +1,5 @@
 import HomeBanner from "../../components/HomeBanner/HomeBanner.component";
-import HomeCategories from "../../components/HomeCategories/HomeCategories.component";
+import ProductCategories from "../../components/ProductCategories/ProductCategories.component";
 import HomeFeatured from "../../components/HomeFeatured/HomeFeatured.component";
 
 const HomePage = () => {
@@ -7,7 +7,7 @@ const HomePage = () => {
     <>
       <HomeBanner />
       <div className="content-container">
-        <HomeCategories />
+        <ProductCategories location="home-page"/>
         <HomeFeatured />
       </div>
     </>

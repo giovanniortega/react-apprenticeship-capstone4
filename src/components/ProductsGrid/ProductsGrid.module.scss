@@ -1,0 +1,19 @@
+@import "../../styles/variables.scss";
+
+.products-container {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.warning-text {
+  color: $text-color;
+  text-align: center;
+  margin-top: 50px;
+  font-size: 22px;
+}
+
+@media (min-width: 960px) {
+  .products-container {
+    flex-flow: row wrap;
+  }
+}

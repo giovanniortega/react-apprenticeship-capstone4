@@ -1,14 +1,10 @@
 import { Link } from "react-router-dom";
 import { FaShoppingCart, FaHeart, FaSearch, FaTimes } from "react-icons/fa";
-import { User } from "../../types/types";
 import Search from "../../components/Search/Search.component";
 import classes from "./Header.module.scss";
 import { useState } from "react";
 
-interface HeaderProps {
-  users: User[];
-}
-const Header = ({ users }: HeaderProps) => {
+const Header = () => {
   const [searchIsOpen, setSearchIsOpen] = useState<boolean>(false);
 
   const searchToggleHandler = () => {
@@ -26,7 +22,6 @@ const Header = ({ users }: HeaderProps) => {
             Furni<span>tures</span>
           </Link>
         </h1>
-        {/* {users.map((user)=><p key={user.id}>{user.name}</p>)} */}
       </div>
       <div className={classes["header-right"]}>
         <div
