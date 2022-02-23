@@ -1,0 +1,43 @@
+@import "../../styles/variables.scss";
+
+.categories-container {
+  display: flex;
+  flex-flow: column wrap;
+  padding-top: 60px;
+  position: relative;
+  height: 60px;
+  overflow: hidden;
+  @extend .transition;
+  &.active {
+    height: 100%;
+  }
+  button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 99;
+    background: $primary-color;
+    border: none;
+    color: $color-white;
+    height: 59px;
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: calc(100vw - 45px);
+      height: 100%;
+      right: 25px;
+      top: 0;
+    }
+  }
+}
+
+@media (min-width: 960px) {
+  .categories-container {
+    flex-flow: row wrap;
+    height: 100%;
+    button {
+      display: none;
+    }
+  }
+}

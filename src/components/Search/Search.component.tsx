@@ -1,6 +1,5 @@
-import React from "react";
-import classes from "./Search.module.scss";
 import { FaSearch } from "react-icons/fa";
+import classes from "./Search.module.scss";
 
 function Search() {
   const submitForm = (evt: any) => {

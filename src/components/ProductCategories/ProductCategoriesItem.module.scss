@@ -1,0 +1,88 @@
+@import "../../styles/variables.scss";
+
+.category-card {
+  width: 100%;
+
+  label {
+    width: 100%;
+    padding: 10px 0;
+    position: relative;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    overflow: hidden;
+    border-bottom: 1px solid $primary-color;
+    cursor: pointer;
+    @extend .transition;
+  }
+
+  input {
+    display: none;
+    &:checked {
+      + label {
+        background-color: $color-primary-25;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    }
+  }
+}
+
+.card-image {
+  width: 60px;
+}
+
+.card-description {
+  text-align: left;
+  padding: 0 10px;
+  color: $primary-color;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 0;
+  width: calc(100% - 100px);
+}
+
+@media (min-width: 960px) {
+  .category-card {
+    label:hover {
+      background-color: $color-primary-25;
+    }
+    &.home-page {
+      width: 20%;
+      border-bottom: none;
+      position: relative;
+
+      label {
+        padding: 0;
+        border-bottom: none;
+      }
+
+      &:hover {
+        .card-image {
+          transform: scale(1.2);
+        }
+      }
+
+      .card-image {
+        width: 100%;
+        transition: all 150ms ease-in-out;
+      }
+
+      .card-description {
+        background-color: $color-black-50;
+        text-align: center;
+        padding: 20px;
+        color: white;
+        text-transform: uppercase;
+        font-weight: 600;
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        width: 100%;
+      }
+    }
+  }
+}

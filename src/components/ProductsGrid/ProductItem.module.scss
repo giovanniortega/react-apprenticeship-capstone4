@@ -1,0 +1,55 @@
+@import "../../styles/variables.scss";
+
+.product-card {
+  width: 100%;
+  padding: 20px 10px;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  border-bottom: 1px solid $color-primary-25;
+}
+
+.card-poster {
+  width: 40%;
+  img {
+    width: 100%;
+  }
+}
+
+.card-info {
+  width: 60%;
+  padding-left: 10px;
+}
+
+.info-title {
+  color: $primary-color;
+  margin: 0 0 15px 0;
+  font-size: 20px;
+}
+
+.info-description {
+  margin: 0 0 15px 0;
+}
+
+.info-price {
+  color: $primary-color;
+  font-family: "Roboto Condensed";
+  font-weight: 600;
+  font-size: 20px;
+}
+
+@media (min-width: 960px) {
+  .product-card {
+    width: 33%;
+    flex-flow: column wrap;
+  }
+
+  .card-poster {
+    width: 100%;
+  }
+
+  .card-info {
+    width: 100%;
+    padding-left: 0;
+  }
+}

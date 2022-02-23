@@ -2,16 +2,24 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import useHttp from "../../utils/hooks/useHttp";
-import { HomeFeaturedType } from "../../types/types";
+import HomeFeaturedItem from "./HomeFeaturedItem.component";
+import {
+  HomeFeaturedItemDataType,
+  SliderSettingsType,
+} from "../../types/types";
 import classes from "./HomeFeatured.module.scss";
 
+interface HomeFeaturedDataType {
+  results: HomeFeaturedItemDataType[];
+}
+
 const HomeFeatured = () => {
-  const [homeFeaturedData, setHomeFeaturedData] = useState<
-    any | HomeFeaturedType
-  >({});
+  const [homeFeaturedData, setHomeFeaturedData] =
+    useState<HomeFeaturedDataType>(Object);
+  const { results } = homeFeaturedData;
   const { apiDataIsLoading, apiError, fetchData } = useHttp();
 
-  const settings = {
+  const settings: SliderSettingsType = {
     dots: true,
     infinite: true,
     speed: 500,
@@ -37,58 +45,35 @@ const HomeFeatured = () => {
   };
 
   useEffect(() => {
-    fetchData("featured-products.json", setHomeFeaturedData);
+    fetchData("mocks/en-us/featured-products.json", setHomeFeaturedData);
   }, [fetchData]);
 
   return (
-    <>
+    <section>
       <div className="section-title">
         <h3>Bestselling in home furniture</h3>
       </div>
 
       {!apiDataIsLoading && Object.keys(homeFeaturedData).length > 0 && (
-        <section className={classes["featured-container"]}>
-          <Slider
-            {...settings}
-            className={`${classes["featured-slider"]} slick-buttons-top-30`}
-          >
-            {homeFeaturedData.results.map((item: any) => (
-              <Link
-                to={item.href}
-                key={item.id}
-                className={classes["featured-card"]}
-              >
-                <div className={classes["featured-image-container"]}>
-                  <img
-                    src={item.data.mainimage.url}
-                    alt={item.data.mainimage.alt}
-                    className={classes["card-image"]}
-                  />
-                  <div className={classes["card-title-container"]}>
-                    <h4 className={classes["card-title"]}>{item.data.name}</h4>
-                  </div>
-                  <span className={classes["card-price"]}>
-                    ${item.data.price}
-                  </span>
-                </div>
-                <p className={classes["card-description"]}>
-                  {item.data.short_description}
-                </p>
-                <p
-                  className={`${classes["card-stock"]} ${
-                    item.data.stock < 4 && classes["alert"]
-                  }`}
-                >
-                  {item.data.stock < 4 && "Only"} {item.data.stock} in stock
-                </p>
-              </Link>
-            ))}
-          </Slider>
-        </section>
+        <Slider
+          {...settings}
+          className={`${classes["featured-slider"]} slick-buttons-top-30`}
+        >
+          {results.map((featured) => (
+            <HomeFeaturedItem featuredData={featured} key={featured.id} />
+          ))}
+        </Slider>
       )}
       {apiDataIsLoading && <p>Data Loading...</p>}
       {apiError && <p>{apiError}</p>}
-    </>
+
+      <div className="t-align-center mt-50">
+        <Link to="/product-list" className="cta cta-primary">
+          View all products
+        </Link>
+      </div>
+    </section>
   );
 };
+
 export default HomeFeatured;

@@ -9,6 +9,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   padding-top: 67px;
+  color: $text-color;
 }
 
 h1,
@@ -28,6 +29,15 @@ h6 {
   max-width: 1280px;
   padding: 0 10px;
   margin: 0 auto;
+}
+
+.aside-layout {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.t-align-center {
+  text-align: center;
 }
 
 /* Slick Slider Custom Styles */
@@ -75,16 +85,6 @@ h6 {
   opacity: 1;
 }
 
-@media (min-width: 960px) {
-  .slick-next {
-    right: 25px;
-  }
-
-  .slick-prev {
-    left: 25px;
-  }
-}
-
 /* Section Titles */
 
 .section-title {
@@ -109,5 +109,96 @@ h6 {
       bottom: 0;
       transform: translateX(-50%);
     }
+  }
+}
+
+/* CTAs */
+
+.cta {
+  background-color: $color-white;
+  border: 1px solid $primary-color;
+  color: $primary-color;
+  padding: 5px 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 500;
+  text-align: center;
+  display: inline-block;
+  cursor: pointer;
+  @extend .transition;
+  &:hover {
+    background-color: $primary-color;
+    color: $color-white;
+  }
+  &:active {
+    transform: scale(0.9);
+  }
+  &.cta-primary {
+    background-color: $primary-color;
+    border-color: $primary-color;
+    color: $color-white;
+    &:hover {
+      background-color: $color-white;
+      color: $primary-color;
+    }
+  }
+  &.cta-secondary {
+    background-color: $secondary-color;
+    border-color: $secondary-color;
+    color: $primary-color;
+    &:hover {
+      background-color: $color-white;
+      border-color: $primary-color;
+    }
+  }
+}
+
+/* Generate Margins */
+
+@mixin generate($prefix, $property) {
+  $sizes: [ 10, 20, 30, 40, 50 ];
+  $spacing: 1px;
+
+  @for $i from 1 through length($sizes) {
+    $size: nth($sizes, $i);
+
+    .#{$prefix}-#{$size} {
+      #{$property}: $spacing * $size;
+    }
+  }
+}
+
+@include generate(mt, margin-top);
+@include generate(mb, margin-bottom);
+
+/* Desktop Breakpoint */
+
+@media (min-width: 960px) {
+  .slick-next {
+    right: 25px;
+  }
+
+  .slick-prev {
+    left: 25px;
+  }
+
+  .aside-layout {
+    display: flex;
+    flex-flow: row wrap;
+
+    aside {
+      width: 320px;
+      padding-right: 10px;
+      position: fixed;
+    }
+
+    section {
+      width: 100%;
+      padding-left: 320px;
+    }
+  }
+
+  main {
+    min-height: calc(100vh - 140px);
   }
 }
