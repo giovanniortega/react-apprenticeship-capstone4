@@ -1,22 +1,29 @@
-import { useContext } from "react";
+import { useContext, useCallback } from "react";
 import { StoreContext } from "../../store/StoreContext";
 import { ProductDataType } from "../../types/types";
 
 function useFilterProducts() {
   const { dispatch } = useContext(StoreContext);
 
-  const filterProducts = (category: string, productList: ProductDataType[]) => {
-    const filteredResults = productList.filter((item) => {
-      const productCategory = item.data.category.id;
-      const thisCategorySelected = category;
+  const filterProducts = useCallback(
+    (category: string, productList: ProductDataType[]) => {
+      const filteredResults = productList.filter((item) => {
+        const productCategory = item.data.category.id;
+        const thisCategorySelected = category;
 
-      if (productCategory === thisCategorySelected) {
-        return item;
-      }
-    });
+        let isProductCategory = false;
 
-    dispatch({ type: "setSelectedProductList", payload: filteredResults });
-  };
+        if (productCategory === thisCategorySelected) {
+          isProductCategory = true;
+        }
+
+        return isProductCategory;
+      });
+
+      dispatch({ type: "setSelectedProductList", payload: filteredResults });
+    },
+    [dispatch]
+  );
 
   return { filterProducts };
 }

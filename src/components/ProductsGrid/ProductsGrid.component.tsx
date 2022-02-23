@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useCallback } from "react";
 import ProductItem from "./ProductItem.component";
 import useHttp from "../../utils/hooks/useHttp";
 import useFilterProducts from "../../utils/hooks/useFilterCategories";
@@ -16,15 +16,15 @@ function ProductsGrid() {
   const { fetchData } = useHttp();
   const { filterProducts } = useFilterProducts();
 
-  const setProductsData = (apiData: ProductsDataType) => {
+  const setProductsData = useCallback((apiData: ProductsDataType) => {
     const { results } = apiData;
     dispatch({ type: "setProductList", payload: apiData });
     filterProducts(categorySelected, results); //Filter products by default
-  };
+  }, [categorySelected, dispatch, filterProducts]);
 
   useEffect(() => {
     fetchData("mocks/en-us/products.json", setProductsData);
-  }, [fetchData]);
+  }, [fetchData, setProductsData]);
 
   return (
     <>
@@ -38,7 +38,7 @@ function ProductsGrid() {
           ))}
         </div>
       ) : (
-        <h4 className={classes['warning-text']}>No products found!</h4>
+        <h4 className={classes["warning-text"]}>No products found!</h4>
       )}
     </>
   );
