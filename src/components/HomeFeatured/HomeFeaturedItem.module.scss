@@ -2,49 +2,56 @@
 
 .featured-card {
   padding: 10px;
-  text-decoration: none;
-  display: block;
 }
 
-.featured-image-container {
+.featured-poster {
   position: relative;
-  margin-bottom: 10px;
+  margin-bottom: 0;
+  display: block;
+  text-decoration: none;
+  overflow: hidden;
+  &:hover {
+    .poster-image {
+      transform: scale(1.1);
+    }
+  }
 }
 
-.card-image {
+.poster-image {
   width: 100%;
+  @extend .transition;
 }
 
-.card-price {
+.poster-category {
   position: absolute;
-  top: 10px;
-  left: 10px;
-  background-color: $primary-color;
-  color: $color-white;
+  top: 0;
+  left: 0;
+  background-color: $secondary-color;
+  color: $primary-color;
+  text-transform: capitalize;
+  font-size: 12px;
+  margin: 0;
   padding: 5px;
-  border-radius: 5px;
-  font-weight: 700;
-  font-size: 18px;
 }
 
-.card-title-container {
+.poster-title-container {
   background: -moz-linear-gradient(
     top,
     rgba(0, 0, 0, 0) 0%,
     rgba(0, 0, 0, 0.5) 25%,
-    rgba(0, 0, 0, 0.5) 100%
+    rgba(0, 0, 0, 1) 100%
   ); /* FF3.6-15 */
   background: -webkit-linear-gradient(
     top,
     rgba(0, 0, 0, 0) 0%,
     rgba(0, 0, 0, 0.5) 25%,
-    rgba(0, 0, 0, 0.5) 100%
+    rgba(0, 0, 0, 1) 100%
   ); /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 0) 0%,
     rgba(0, 0, 0, 0.5) 25%,
-    rgba(0, 0, 0, 0.5) 100%
+    rgba(0, 0, 0, 1) 100%
   ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   padding: 10px;
   height: 70px;
@@ -55,27 +62,40 @@
   align-items: center;
 }
 
-.card-title {
+.poster-title {
   color: $color-white;
   margin: 0;
   font-size: 20px;
 }
 
-.card-description {
-  color: $text-color;
-  margin: 0;
-  font-size: 14px;
-  max-height: 96px;
-  overflow: hidden;
+.card-info {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
 }
 
-.card-stock {
+.info-price {
+  background-color: $primary-color;
+  color: $color-white;
+  padding: 5px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  font-weight: 700;
+  font-size: 18px;
+  text-align: center;
+  margin: 0;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.info-stock {
   background-color: $color-primary-50;
   color: $color-white;
   padding: 5px;
   border-radius: 5px;
   display: inline-block;
   font-size: 12px;
+  margin: 0;
   &.alert {
     background-color: $secondary-color;
     color: $text-color;

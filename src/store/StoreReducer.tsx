@@ -1,7 +1,7 @@
 import { StoreState, ProductDataType } from "../types/types";
 
 const initialStore: StoreState = {
-  categorySelected: "YWHviRIAACsAyjP3",
+  categorySelected: "all-products",
   productList: {
     results: [],
   },

@@ -29,7 +29,7 @@ const Header = () => {
             searchIsOpen && classes["active"]
           }`}
         >
-          <Search />
+          <Search onClose={searchToggleHandler}/>
         </div>
         <ul className={classes["utilities-menu"]}>
           <li className={classes["search-mob-cta"]}>

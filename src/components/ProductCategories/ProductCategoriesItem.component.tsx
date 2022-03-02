@@ -1,14 +1,14 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router";
 import { StoreContext } from "../../store/StoreContext";
-import useFilterProducts from "../../utils/hooks/useFilterCategories";
+import useFilterProducts from "../../utils/hooks/useFilterProducts";
 import { ProductCategoryDataType } from "../../types/types";
 import classes from "./ProductCategoriesItem.module.scss";
 
 interface categoryItemProps {
   dataCategory: ProductCategoryDataType;
   closeCat: () => void;
-  location: string;
+  location?: string;
 }
 
 function ProductCategoriesItem({
@@ -24,13 +24,14 @@ function ProductCategoriesItem({
 
   const categoryHandler = (evt: any) => {
     const categoryValue = evt.target.value;
+    const slug = dataCategory.slugs[0];
 
     dispatch({ type: "setCategorySelected", payload: categoryValue });
 
     filterProducts(categoryValue, results);
 
     if (location === "home-page") {
-      navigate("/product-list");
+      navigate(`/products?category=${slug}`);
     }
 
     closeCat();

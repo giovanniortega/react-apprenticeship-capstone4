@@ -1,45 +1,54 @@
-import { useContext, useEffect, useCallback } from "react";
+import { useContext, useCallback, useEffect, useState } from "react";
 import ProductItem from "./ProductItem.component";
-import useHttp from "../../utils/hooks/useHttp";
-import useFilterProducts from "../../utils/hooks/useFilterCategories";
+import Pagination from "../Pagination/Pagination.component";
 import { StoreContext } from "../../store/StoreContext";
 import { ProductDataType } from "../../types/types";
 import classes from "./ProductsGrid.module.scss";
 
-interface ProductsDataType {
-  results: ProductDataType[];
-}
-
 function ProductsGrid() {
-  const { store, dispatch } = useContext(StoreContext);
-  const { selectedCategoryProductList, categorySelected } = store;
-  const { fetchData } = useHttp();
-  const { filterProducts } = useFilterProducts();
+  const { store } = useContext(StoreContext);
+  const { selectedCategoryProductList } = store;
+  const [pageItems, setPageItems] = useState<ProductDataType[]>([]);
+  const [activePage, setActivePage] = useState<number>(1);
 
-  const setProductsData = useCallback((apiData: ProductsDataType) => {
-    const { results } = apiData;
-    dispatch({ type: "setProductList", payload: apiData });
-    filterProducts(categorySelected, results); //Filter products by default
-  }, [categorySelected, dispatch, filterProducts]);
+  const itemsPerPage: number = 12;
+
+  const getItemsPerPage = useCallback(
+    (from: number, to: number, activePage: number) => {
+      const currentItems = selectedCategoryProductList.slice(from, to);
+
+      setPageItems(currentItems);
+      setActivePage(activePage);
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    },
+    [selectedCategoryProductList]
+  );
 
   useEffect(() => {
-    fetchData("mocks/en-us/products.json", setProductsData);
-  }, [fetchData, setProductsData]);
+    getItemsPerPage(0, itemsPerPage, 1);
+  }, [selectedCategoryProductList, getItemsPerPage]);
 
   return (
     <>
-      <div className="section-title">
-        <h3>Product List</h3>
-      </div>
-      {selectedCategoryProductList.length > 0 ? (
+      {pageItems.length > 0 ? (
         <div className={classes["products-container"]}>
-          {selectedCategoryProductList.map((product) => (
+          {pageItems.map((product) => (
             <ProductItem key={product.id} productData={product} />
           ))}
         </div>
       ) : (
         <h4 className={classes["warning-text"]}>No products found!</h4>
       )}
+      <Pagination
+        itemsLength={selectedCategoryProductList.length}
+        itemsPerPage={itemsPerPage}
+        getItemsPerPageHanlder={getItemsPerPage}
+        activePage={activePage}
+      />
     </>
   );
 }

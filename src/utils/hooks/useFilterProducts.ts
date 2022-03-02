@@ -13,7 +13,9 @@ function useFilterProducts() {
 
         let isProductCategory = false;
 
-        if (productCategory === thisCategorySelected) {
+        if (category === "all-products") {
+          isProductCategory = true;
+        } else if (productCategory === thisCategorySelected) {
           isProductCategory = true;
         }
 

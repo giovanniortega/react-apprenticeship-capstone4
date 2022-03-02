@@ -32,6 +32,10 @@
   }
 }
 
+.category-default {
+  width: 100%;
+}
+
 @media (min-width: 960px) {
   .categories-container {
     flex-flow: row wrap;
@@ -39,5 +43,8 @@
     button {
       display: none;
     }
+  }
+  .hide-category {
+    display: none;
   }
 }

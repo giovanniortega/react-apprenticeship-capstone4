@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import useHttp from "../../utils/hooks/useHttp";
 import HomeFeaturedItem from "./HomeFeaturedItem.component";
+import { StoreContext } from "../../store/StoreContext";
 import {
   HomeFeaturedItemDataType,
   SliderSettingsType,
@@ -17,7 +18,15 @@ const HomeFeatured = () => {
   const [homeFeaturedData, setHomeFeaturedData] =
     useState<HomeFeaturedDataType>(Object);
   const { results } = homeFeaturedData;
-  const { apiDataIsLoading, apiError, fetchData } = useHttp();
+  const { dispatch } = useContext(StoreContext);
+  const { apiDataIsLoading, apiError, isApiMetadataLoading, fetchData } =
+    useHttp();
+  const navigate = useNavigate();
+
+  const viewAllProductsHandler = () => {
+    dispatch({ type: "setCategorySelected", payload: "all-products" });
+    navigate("/products");
+  };
 
   const settings: SliderSettingsType = {
     dots: true,
@@ -45,8 +54,17 @@ const HomeFeatured = () => {
   };
 
   useEffect(() => {
-    fetchData("mocks/en-us/featured-products.json", setHomeFeaturedData);
-  }, [fetchData]);
+    const queryParams = {
+      docType: "product",
+      docTags: "Featured",
+      lang: "en-us",
+      pageSize: 16,
+    };
+
+    if (!isApiMetadataLoading) {
+      fetchData(queryParams, setHomeFeaturedData);
+    }
+  }, [isApiMetadataLoading, fetchData]);
 
   return (
     <section>
@@ -68,9 +86,9 @@ const HomeFeatured = () => {
       {apiError && <p>{apiError}</p>}
 
       <div className="t-align-center mt-50">
-        <Link to="/product-list" className="cta cta-primary">
+        <button className="cta cta-primary" onClick={viewAllProductsHandler}>
           View all products
-        </Link>
+        </button>
       </div>
     </section>
   );

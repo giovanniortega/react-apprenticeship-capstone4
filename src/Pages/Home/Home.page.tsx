@@ -7,7 +7,7 @@ const HomePage = () => {
     <>
       <HomeBanner />
       <div className="content-container">
-        <ProductCategories location="home-page"/>
+        <ProductCategories location="home-page" />
         <HomeFeatured />
       </div>
     </>

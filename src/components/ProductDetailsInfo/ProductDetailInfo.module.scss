@@ -1,0 +1,71 @@
+@import "../../styles/variables.scss";
+
+.detail-title {
+  color: $primary-color;
+  margin-top: 0;
+  font-size: 35px;
+  margin-bottom: 10px;
+}
+
+.detail-sku,
+.detail-category {
+  font-size: 12px;
+  margin: 0;
+}
+
+.detail-sku {
+  margin-bottom: 5px;
+}
+
+.detail-category {
+  margin-bottom: 15px;
+  span {
+    text-transform: capitalize;
+  }
+}
+
+.detail-tags {
+  display: flex;
+  font-size: 12px;
+  line-height: 1;
+}
+
+.tag {
+  background-color: $secondary-color;
+  display: inline-block;
+  color: $primary-color;
+  border-radius: 3px;
+  padding: 5px;
+  margin-right: 3px;
+}
+
+.detail-add-cta {
+  display: flex;
+  input {
+    border: none;
+    outline: none;
+    margin: 0;
+    text-align: center;
+    background: none;
+    width: 50px;
+    color: $primary-color;
+    font-size: 16px;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  button {
+    background: none;
+    border: none;
+    color: $primary-color;
+    padding: 10px;
+    background-color: $secondary-color;
+    margin-right: 10px;
+    cursor: pointer;
+    &:hover {
+      background: $primary-color;
+      color: $color-white;
+    }
+  }
+  span {
+    padding: 8px 0;
+  }
+}
