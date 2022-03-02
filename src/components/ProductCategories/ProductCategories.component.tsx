@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import ProductCategoriesItem from "./ProductCategoriesItem.component";
 import useHttp from "../../utils/hooks/useHttp";
 import { ProductCategoryDataType } from "../../types/types";
+import ftImage from "../../images/ft-poster-img.jpg";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 import classes from "./ProductCategories.module.scss";
 
@@ -17,12 +18,22 @@ const ProductCategories = ({ location }: categoryProps) => {
   const [productCategoriesData, setProductCategoriesData] =
     useState<ProductCategoriesDataType>(Object);
   const { results } = productCategoriesData;
-  const { apiDataIsLoading, apiError, fetchData } = useHttp();
   const [catDropDownIsOpen, setCatDropDownIsOpen] = useState<boolean>(false);
+  const { apiDataIsLoading, apiError, isApiMetadataLoading, fetchData } =
+    useHttp();
 
-  useEffect(() => {
-    fetchData("mocks/en-us/product-categories.json", setProductCategoriesData);
-  }, [fetchData]);
+  const allCategoriesData: ProductCategoryDataType = {
+    id: "all-products",
+    href: "/",
+    slugs: ["all-products"],
+    data: {
+      name: "All our products",
+      main_image: {
+        alt: "All prooducts",
+        url: ftImage,
+      },
+    },
+  };
 
   const dropDownHandler = () => {
     setCatDropDownIsOpen(!catDropDownIsOpen);
@@ -32,6 +43,18 @@ const ProductCategories = ({ location }: categoryProps) => {
   catDropDownIsOpen
     ? (upDownCatButtonIcon = <FaAngleUp />)
     : (upDownCatButtonIcon = <FaAngleDown />);
+
+  useEffect(() => {
+    const queryParams = {
+      docType: "category",
+      lang: "en-us",
+      pageSize: 5,
+    };
+
+    if (!isApiMetadataLoading) {
+      fetchData(queryParams, setProductCategoriesData);
+    }
+  }, [isApiMetadataLoading, fetchData]);
 
   return (
     <div>
@@ -48,6 +71,14 @@ const ProductCategories = ({ location }: categoryProps) => {
           <button type="button" onClick={dropDownHandler}>
             {upDownCatButtonIcon}
           </button>
+
+          <div className={`${classes['category-default']} ${location === "home-page" && classes['hide-category']}`}>
+            <ProductCategoriesItem
+              dataCategory={allCategoriesData}
+              closeCat={dropDownHandler}
+            />
+          </div>
+
           {results.map((category) => (
             <ProductCategoriesItem
               key={category.id}

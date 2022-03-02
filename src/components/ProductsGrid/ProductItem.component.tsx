@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { ProductDataType } from "../../types/types";
 import classes from "./ProductItem.module.scss";
 
@@ -6,8 +7,16 @@ interface ProductProps {
 }
 
 function ProductItem({ productData }: ProductProps) {
+  const location = window.location.pathname;
+  console.log("productData", productData);
+
   return (
-    <div className={classes["product-card"]}>
+    <Link
+      to={`/product/${productData.id}`}
+      className={`${classes["product-card"]} ${
+        location === "/search" && classes["search-card"]
+      }`}
+    >
       <div className={classes["card-poster"]}>
         <img
           src={productData.data.mainimage.url}
@@ -16,18 +25,18 @@ function ProductItem({ productData }: ProductProps) {
       </div>
       <div className={classes["card-info"]}>
         <h3 className={classes["info-title"]}>{productData.data.name}</h3>
-        <p className={classes["info-description"]}>
-          {productData.data.short_description}
+        <p className={classes["info-sku"]}>
+          <b>SKU: </b>
+          {productData.data.sku}
         </p>
-        <p className={classes["info-price"]}>
-          <sup>$</sup>
-          {productData.data.price}
-        </p>
-        <button type="button" className="cta cta-secondary">
-          Add to cart
-        </button>
+        <div className={classes["card-actions"]}>
+          <p className="price-sticker">
+            <sup>$</sup>
+            {productData.data.price}
+          </p>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 }
 

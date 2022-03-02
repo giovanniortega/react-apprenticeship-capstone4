@@ -1,0 +1,11 @@
+@import "../../styles/variables.scss";
+
+.pagination-item {
+  margin: 0 5px;
+  &.active {
+    button {
+      background-color: $primary-color;
+      color: $color-white;
+    }
+  }
+}

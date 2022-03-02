@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { API_BASE_URL } from "../constants";
 import { useLatestAPI } from "./useLatestAPI";
 
@@ -11,15 +11,22 @@ interface queryParamsType {
   pageSize?: number;
 }
 
-const useHttp = () => {
+const useHttp = (
+  queryParams: queryParamsType,
+  setApiData: (data: any) => void
+) => {
   const [apiDataIsLoading, setApiDataIsLoading] = useState<boolean>(false);
   const [apiError, setApiError] = useState<string | null>(null);
   const { ref: apiRef, isLoading: isApiMetadataLoading } = useLatestAPI();
 
-  const fetchData = useCallback(
-    async (queryParams: queryParamsType, setApiData: (data: any) => void) => {
-      const controller = new AbortController();
+  useEffect(() => {
+    if (!apiRef || isApiMetadataLoading) {
+      return () => {};
+    }
 
+    const controller = new AbortController();
+
+    const fetchData = async () => {
       setApiDataIsLoading(true);
 
       const joinParams = [
@@ -62,15 +69,26 @@ const useHttp = () => {
         setApiError(error.message || "Something went wrong");
         setApiDataIsLoading(false);
       }
+    };
 
-      return () => {
-        controller.abort();
-      };
-    },
-    [apiRef]
-  );
+    fetchData();
 
-  return { apiDataIsLoading, apiError, isApiMetadataLoading, fetchData };
+    return () => {
+      controller.abort();
+    };
+  }, [
+    apiRef,
+    isApiMetadataLoading,
+    setApiData,
+    queryParams.docId,
+    queryParams.docType,
+    queryParams.docTags,
+    queryParams.searchTerm,
+    queryParams.lang,
+    queryParams.pageSize,
+  ]);
+
+  return { apiDataIsLoading, apiError };
 };
 
 export default useHttp;

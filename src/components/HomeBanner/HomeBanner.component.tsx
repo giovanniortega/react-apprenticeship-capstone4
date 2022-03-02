@@ -12,11 +12,8 @@ const HomeBanner = () => {
   const [homeBannerData, setHomeBannerData] =
     useState<HomeBannerDataType>(Object);
   const { results } = homeBannerData;
-  const { apiDataIsLoading, apiError, fetchData } = useHttp();
-
-  useEffect(() => {
-    fetchData("mocks/en-us/featured-banners.json", setHomeBannerData);
-  }, [fetchData]);
+  const { apiDataIsLoading, apiError, isApiMetadataLoading, fetchData } =
+    useHttp();
 
   const settings: SliderSettingsType = {
     dots: true,
@@ -26,6 +23,18 @@ const HomeBanner = () => {
     slidesToScroll: 1,
     autoplay: true,
   };
+
+  useEffect(() => {
+    const queryParams = {
+      docType: "banner",
+      lang: "en-us",
+      pageSize: 5,
+    };
+
+    if (!isApiMetadataLoading) {
+      fetchData(queryParams, setHomeBannerData);
+    }
+  }, [isApiMetadataLoading, fetchData]);
 
   return (
     <section>

@@ -15,5 +15,6 @@
 @media (min-width: 960px) {
   .products-container {
     flex-flow: row wrap;
+    justify-content: center;
   }
 }
