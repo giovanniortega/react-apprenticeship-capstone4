@@ -19,6 +19,11 @@ function ProductDetailPage() {
     useHttp();
   const { productId } = useParams();
 
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+
   useEffect(() => {
     const queryParams = {
       docId: productId,
