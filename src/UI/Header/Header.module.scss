@@ -82,6 +82,26 @@
   }
 }
 
+.cart-link {
+  position: relative;
+}
+
+.cart-badge {
+  width: 14px;
+  height: 14px;
+  background-color: $secondary-color;
+  color: $primary-color;
+  display: block;
+  font-size: 12px;
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  border-radius: 50%;
+  line-height: 14px;
+  text-align: center;
+  font-weight: 600;
+}
+
 @media (min-width: 960px) {
   .search-component {
     height: auto;

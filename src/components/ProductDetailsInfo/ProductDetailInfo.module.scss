@@ -28,6 +28,7 @@
   display: flex;
   font-size: 12px;
   line-height: 1;
+  margin-top: 10px;
 }
 
 .tag {
@@ -39,15 +40,16 @@
   margin-right: 3px;
 }
 
-.detail-add-cta {
+.detail-controls {
   display: flex;
-  input {
+  align-items: center;
+  .item-counter {
     border: none;
     outline: none;
     margin: 0;
     text-align: center;
     background: none;
-    width: 50px;
+    width: 40px;
     color: $primary-color;
     font-size: 16px;
     background-color: rgba(0, 0, 0, 0.1);
@@ -55,14 +57,36 @@
   button {
     background: none;
     border: none;
-    color: $primary-color;
     padding: 10px;
-    background-color: $secondary-color;
-    margin-right: 10px;
     cursor: pointer;
+  }
+  .cart-cta {
+    background-color: $secondary-color;
+    color: $primary-color;
+    margin-right: 10px;
     &:hover {
       background: $primary-color;
       color: $color-white;
+    }
+    &:active {
+      background: $color-primary-50;
+    }
+  }
+  .counter-cta {
+    background-color: $primary-color;
+    color: $color-white;
+    box-shadow: inset 0px 0px 0px 1px $primary-color;
+    &:hover {
+      background: $color-white;
+      color: $primary-color;
+    }
+    &:disabled {
+      opacity: 0.5;
+      cursor: default;
+      &:hover {
+        background-color: $primary-color;
+        color: $color-white;
+      }
     }
   }
   span {

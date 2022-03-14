@@ -11,10 +11,10 @@ interface ProductResultsDataType {
 }
 
 interface SearchPropsType {
-  onClose: ()=>void;
+  onClose: () => void;
 }
 
-function Search({onClose}:SearchPropsType) {
+function Search({ onClose }: SearchPropsType) {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const navigate = useNavigate();
   const { filterProducts } = useFilterProducts();

@@ -8,7 +8,6 @@ interface ProductProps {
 
 function ProductItem({ productData }: ProductProps) {
   const location = window.location.pathname;
-  console.log("productData", productData);
 
   return (
     <Link

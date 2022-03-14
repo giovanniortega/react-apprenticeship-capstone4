@@ -1,0 +1,95 @@
+@import "../../styles/variables.scss";
+
+.cart-product {
+  display: flex;
+  flex-flow: row wrap;
+  background-color: $color-white;
+  margin-bottom: 10px;
+  border: 1px solid $color-primary-25;
+}
+
+.product-poster {
+  width: 100px;
+  padding: 10px;
+  border-right: 1px solid $color-primary-25;
+  img {
+    width: 100%;
+  }
+}
+
+.product-data {
+  display: flex;
+  flex-flow: column wrap;
+  width: calc(100% - 100px);
+  padding: 10px;
+}
+
+.product-info {
+  width: 100%;
+  h3 {
+    color: $primary-color;
+    border-bottom: 1px solid $color-primary-50;
+    display: inline-block;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+  }
+}
+
+.product-summary {
+  width: 100%;
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.product-actions {
+  display: flex;
+  flex-flow: row wrap;
+  margin-bottom: 10px;
+  b {
+    margin-right: 5px;
+  }
+}
+
+.counter-cta {
+  background-color: $primary-color;
+  color: $color-white;
+  box-shadow: inset 0px 0px 0px 1px $primary-color;
+  border: none;
+  padding: 0 5px;
+  margin: 0 5px;
+  cursor: pointer;
+  &:hover {
+    background: $color-white;
+    color: $primary-color;
+  }
+  &:active {
+    background: $color-primary-25;
+  }
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+    &:hover {
+      background-color: $primary-color;
+      color: $color-white;
+    }
+  }
+}
+
+@media (min-width: 960px) {
+  .product-data {
+    flex-flow: row wrap;
+    padding: 0;
+  }
+
+  .product-info {
+    width: calc(100% - 200px);
+    padding: 10px;
+    border-right: 1px solid $color-primary-25;
+  }
+
+  .product-summary {
+    padding: 10px;
+    width: 200px;
+  }
+}

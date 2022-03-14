@@ -1,11 +1,26 @@
+import { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { FaShoppingCart, FaHeart, FaSearch, FaTimes } from "react-icons/fa";
+import { StoreContext } from "../../store/StoreContext";
+import { FaShoppingCart, FaSearch, FaTimes } from "react-icons/fa";
 import Search from "../../components/Search/Search.component";
 import classes from "./Header.module.scss";
-import { useState } from "react";
 
 const Header = () => {
+  const { store, dispatch } = useContext(StoreContext);
+  const { cartList } = store;
   const [searchIsOpen, setSearchIsOpen] = useState<boolean>(false);
+
+  const furnituresCartStorage: string | null =
+    window.localStorage.getItem("FurnituresSiteCart");
+
+  useEffect(() => {
+    if (furnituresCartStorage) {
+      dispatch({
+        type: "setCartList",
+        payload: JSON.parse(furnituresCartStorage),
+      });
+    }
+  }, [dispatch, furnituresCartStorage]);
 
   const searchToggleHandler = () => {
     setSearchIsOpen(!searchIsOpen);
@@ -29,20 +44,16 @@ const Header = () => {
             searchIsOpen && classes["active"]
           }`}
         >
-          <Search onClose={searchToggleHandler}/>
+          <Search onClose={searchToggleHandler} />
         </div>
         <ul className={classes["utilities-menu"]}>
           <li className={classes["search-mob-cta"]}>
             <button onClick={searchToggleHandler}>{searchIcon}</button>
           </li>
           <li>
-            <Link to="/">
+            <Link to="/cart" className={classes["cart-link"]}>
               <FaShoppingCart />
-            </Link>
-          </li>
-          <li>
-            <Link to="/">
-              <FaHeart />
+              <span className={classes["cart-badge"]}>{cartList.length}</span>
             </Link>
           </li>
         </ul>
