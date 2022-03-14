@@ -1,0 +1,106 @@
+@import "../../styles/variables.scss";
+
+.checkout-form {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.form-summary,
+.form-actions {
+  width: 100%;
+}
+
+.form-actions {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  button,
+  a {
+    padding: 10px;
+    font-size: 16px;
+    width: 100%;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+  button:disabled {
+    background: $color-primary-25;
+    border: 1px solid $color-primary-50;
+    &:hover {
+      background: $color-primary-25;
+      border: 1px solid $color-primary-50;
+    }
+  }
+}
+
+.form-control {
+  display: flex;
+  flex-flow: column wrap;
+  margin-bottom: 10px;
+  label {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    sup {
+      color: red;
+    }
+  }
+  input,
+  textarea {
+    border: 1px solid $color-primary-25;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
+      0 2px 1px -1px rgba(0, 0, 0, 0.12);
+    padding: 5px;
+  }
+  &.invalid {
+    input {
+      background-color: rgba(255, 0, 0, 0.1);
+      border-color: red;
+    }
+    label {
+      color: red;
+    }
+  }
+  .error-text {
+    color: red;
+    margin: 0;
+  }
+}
+
+.form-table {
+  margin: 20px 0;
+  width: 100%;
+  th,
+  td {
+    padding: 5px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
+      0 2px 1px -1px rgba(0, 0, 0, 0.12);
+  }
+
+  th {
+    background-color: $color-primary-25;
+    color: $primary-color;
+  }
+
+  td {
+    background-color: $color-white;
+  }
+
+  sup {
+    font-size: 70%;
+  }
+}
+
+@media (min-width: 960px) {
+  .checkout-form {
+    flex-flow: row wrap;
+  }
+  .form-summary {
+    width: 70%;
+    padding-right: 10px;
+  }
+  .form-actions {
+    width: 30%;
+    padding-left: 10px;
+    margin-top: 30px;
+  }
+}

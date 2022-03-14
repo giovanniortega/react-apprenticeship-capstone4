@@ -5,6 +5,7 @@ import useHttp from "../../utils/hooks/useHttp";
 import ProductGallery from "../../components/ProductGallery/ProductGallery.component";
 import ProductDetailInfo from "../../components/ProductDetailsInfo/ProductDetailInfo.component";
 import classes from "./ProductDetail.module.scss";
+import HomeFeatured from "../../components/HomeFeatured/HomeFeatured.component";
 
 interface ProductResultsDataType {
   results: ProductDataType[];
@@ -42,6 +43,7 @@ function ProductDetailPage() {
       )}
       {apiDataIsLoading && <p>Data Loading...</p>}
       {apiError && <p>{apiError}</p>}
+      <HomeFeatured />
     </div>
   );
 }

@@ -69,7 +69,7 @@ const HomeFeatured = () => {
   return (
     <section>
       <div className="section-title">
-        <h3>Bestselling in home furniture</h3>
+        <h3>Bestselling in home</h3>
       </div>
 
       {!apiDataIsLoading && Object.keys(homeFeaturedData).length > 0 && (

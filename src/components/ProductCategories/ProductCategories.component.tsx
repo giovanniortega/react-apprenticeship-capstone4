@@ -72,7 +72,11 @@ const ProductCategories = ({ location }: categoryProps) => {
             {upDownCatButtonIcon}
           </button>
 
-          <div className={`${classes['category-default']} ${location === "home-page" && classes['hide-category']}`}>
+          <div
+            className={`${classes["category-default"]} ${
+              location === "home-page" && classes["hide-category"]
+            }`}
+          >
             <ProductCategoriesItem
               dataCategory={allCategoriesData}
               closeCat={dropDownHandler}

@@ -4,6 +4,13 @@ export interface StoreState {
     results: ProductDataType[];
   };
   selectedCategoryProductList: ProductDataType[];
+  cartList: productToCartType[];
+}
+
+export interface productToCartType {
+  productsAmount: number;
+  productTotalPrice: number;
+  productData: ProductDataType;
 }
 
 export interface SliderSettingsType {

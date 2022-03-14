@@ -46,7 +46,9 @@ function SearchResults() {
         <h3>
           {selectedCategoryProductList.length} result
           {selectedCategoryProductList.length > 1 ||
-            (selectedCategoryProductList.length === 0 && "s")}{" "}
+          selectedCategoryProductList.length === 0
+            ? "s"
+            : null}{" "}
           for {params.q}
         </h3>
       </div>

@@ -1,0 +1,26 @@
+@import "../../styles/variables.scss";
+
+.summary-container {
+  background-color: $color-white;
+  padding: 20px;
+  border-radius: 5px;
+  border: 1px solid $color-primary-25;
+  h2 {
+    color: $primary-color;
+    font-size: 30px;
+  }
+  h3 {
+    font-size: 25px;
+  }
+  a {
+    width: 100%;
+  }
+}
+
+@media (min-width: 960px) {
+  .summary-container {
+    position: fixed;
+    width: 22%;
+    margin-top: 105px;
+  }
+}
